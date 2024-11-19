@@ -1,16 +1,22 @@
 #🚅기차표 예매 앱
 
 
-##✔️  Language : dart 
-##✔️Framework : Flutter
+##✔️ Language : dart
+
+##✔️ Framework : Flutter
 </br>
 </br>
 </br>
-###기차표를 예매할 수 있는 앱 구현
+##🎫기차표를 예매할 수 있는 앱 구현
 </br>
 </br>
 </br>
-###기능
+##☘️기능
+1.출발역과 도착역 선택
+
+2.예매하기를 통해 좌석 선택
+
+3.다크 모드로 전환
 </br>
 </br>
 <img src = "https://github.com/user-attachments/assets/357f90b8-deb5-4d8b-abb4-28dddd1180e9" width="200" height="400">

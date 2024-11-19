@@ -20,7 +20,6 @@
 </br>
 </br>
 <img src = "https://github.com/user-attachments/assets/e33aa1ec-dfaf-4343-96c7-527f8897d37c" width="200" height="400">
-
 <img src = "https://github.com/user-attachments/assets/07a2d68b-8a8c-4a71-a6a7-a17e1fdcca7d" width="200" height="400">
 </br>
 ###선택된 역은 리스트에서 제외됨

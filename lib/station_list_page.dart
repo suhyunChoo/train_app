@@ -35,12 +35,12 @@ class _StationListPageState extends State<StationListPage> {
       //이미 선택된 역 리스트에서 제외하기
       if(widget.isdeparture==true){
         stationList.remove(widget.arrival);
-        if(!stationList.contains(widget.departure)){
+        if(!stationList.contains(widget.departure) && widget.departure != '선택'){
           stationList.add(widget.departure);
         }
       }else if(widget.isdeparture==false){
         stationList.remove(widget.departure);
-        if(!stationList.contains(widget.arrival)){
+        if(!stationList.contains(widget.arrival) && widget.arrival != '선택'){
           stationList.add(widget.arrival);
         }
       }

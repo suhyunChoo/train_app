@@ -29,7 +29,7 @@ class _StationListPageState extends State<StationListPage> {
     );
   }
 
-  //역 리스트 만들기
+  //위젯 리스트에 승차역 추가하기
   Widget createStation(){
     try{
       //이미 선택된 역 리스트에서 제외하기
@@ -61,6 +61,7 @@ class _StationListPageState extends State<StationListPage> {
     }
   }
 
+  //승차역 리스트 만들기 
   Widget stationName(String station,BuildContext context){
     return GestureDetector(
       onTap: (){

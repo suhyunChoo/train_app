@@ -31,7 +31,6 @@ class _SeatPageState extends State<SeatPage> {
     };
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -131,10 +130,9 @@ class _SeatPageState extends State<SeatPage> {
           borderRadius: BorderRadius.circular(8),
           ),
         child: Text(text, style: TextStyle(fontSize: 18),),
-      ),
-    ],
-          );
-
+        ),
+      ],
+    );
   }
 
   Column label(String text, Color color) {

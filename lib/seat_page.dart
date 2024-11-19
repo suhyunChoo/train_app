@@ -39,6 +39,7 @@ class _SeatPageState extends State<SeatPage> {
       body: 
         Column(
           children: [
+            SizedBox(height: 20,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -47,19 +48,20 @@ class _SeatPageState extends State<SeatPage> {
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
-                color: Colors.purple,
+                color: Theme.of(context).highlightColor,
+                ),
               ),
-            ),
-            Icon(Icons.arrow_circle_right_outlined, size: 30,),
-            Text(
-              widget.arrival,
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Colors.purple,
+              SizedBox(width: 20,),
+              Icon(Icons.arrow_circle_right_outlined, size: 30,),
+              SizedBox(width: 20,),
+              Text(
+                widget.arrival,
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color:Theme.of(context).highlightColor,
+                ),
               ),
-            ),
-        
             ],),
             SizedBox(height: 16),
             Padding(
@@ -98,13 +100,12 @@ class _SeatPageState extends State<SeatPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 20),
+              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
               child: SizedBox(
                 height: 56,
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20), // 모서리 둥글게 설정
                     ),
@@ -138,19 +139,17 @@ class _SeatPageState extends State<SeatPage> {
 
   Column label(String text, Color color) {
     return Column(children: [
-            Container(
-              width: 24,
-              height: 24,
-              decoration: BoxDecoration(
-                color: color,
-                borderRadius: BorderRadius.circular(8),
-                ),
-            ),
-            SizedBox(width: 4),
-            Text(text),
-          ],
-          
-          
+      Container(
+        width: 24,
+        height: 24,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(8),
+          ),
+      ),
+      SizedBox(width: 4),
+      Text(text),
+    ],
           );
   }
 
@@ -186,7 +185,8 @@ class _SeatPageState extends State<SeatPage> {
   Widget seat(int rowNum, String colNum, BuildContext context){
     return GestureDetector(
       onTap: (){
-        onselected(rowNum, colNum);
+        if(widget.departure!='선택'&&widget.arrival!='선택'){
+          onselected(rowNum, colNum);
         showCupertinoDialog(context: context, builder: (context){
           return CupertinoAlertDialog(
             title: Text('예매 하시겠습니까?'),
@@ -209,6 +209,7 @@ class _SeatPageState extends State<SeatPage> {
             ],
           );
         });
+        }
       },
       child: Container(
         height: 50,
@@ -220,7 +221,6 @@ class _SeatPageState extends State<SeatPage> {
           borderRadius: BorderRadius.circular(10),
           ),),
     );
-
   }
 }
 

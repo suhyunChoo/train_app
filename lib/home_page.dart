@@ -17,7 +17,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('기차 예매'),),
-      backgroundColor: Colors.grey[200],
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -27,7 +26,7 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.all(20),
               height: 200,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.circular(20),            
               ),
               child: Row(
@@ -96,15 +95,18 @@ class _HomePageState extends State<HomePage> {
                 height: 56,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple,
+                    backgroundColor: Theme.of(context).highlightColor,
                       shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context){
+                    if(arrival != '선택' && departure != '선택'){
+                      Navigator.push(context, MaterialPageRoute(builder: (context){
                             return SeatPage(departure,arrival);
                           },));
+                    }
+                    
                   },
                   child: Text("좌석 선택", style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.white),),
                 ),

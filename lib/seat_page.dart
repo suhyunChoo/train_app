@@ -109,7 +109,34 @@ class _SeatPageState extends State<SeatPage> {
                       borderRadius: BorderRadius.circular(20), // 모서리 둥글게 설정
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    if(widget.departure!='선택'&&widget.arrival!='선택'){
+                      onselected(selectedRow!, selectedCol!);
+                    showCupertinoDialog(context: context, builder: (context){
+                      return CupertinoAlertDialog(
+                        title: Text('예매 하시겠습니까?'),
+                        content: Text('좌석 $selectedRow - $selectedCol'),
+                        actions: [
+                          CupertinoDialogAction(
+                            isDefaultAction: true,
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('취소')),
+                          CupertinoDialogAction(
+                            isDestructiveAction: true,
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                        return HomePage();
+                                      },));
+                            },
+                            child: Text('확인')),
+                        ],
+                      );
+                    });
+                    }
+
+                  },
                   child: Text("예매 하기", style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.white),),
                 ),
                           ),
@@ -152,72 +179,55 @@ class _SeatPageState extends State<SeatPage> {
   }
 
   Widget row(int rowNum,BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-      seat(rowNum,'A',context),
-      SizedBox(width: 4),
-      seat(rowNum,'B',context),
-      SizedBox(width: 4),
-      Center(
-        child: 
-        Container(
-          width: 50,
-          height: 50,
-          alignment: Alignment.center,
-          child: Text(
-            '$rowNum',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold),),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+        seat(rowNum,'A',context),
+        SizedBox(width: 4),
+        seat(rowNum,'B',context),
+        SizedBox(width: 4),
+        Center(
+          child: 
+          Container(
+            width: 50,
+            height: 50,
+            alignment: Alignment.center,
+            child: Text(
+              '$rowNum',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold),),
+          ),
         ),
-      ),
-      SizedBox(width: 4),
-      seat(rowNum,'C',context),
-      SizedBox(width: 4),
-      seat(rowNum,'D',context),
-        ],);
+        SizedBox(width: 4),
+        seat(rowNum,'C',context),
+        SizedBox(width: 4),
+        seat(rowNum,'D',context),
+          ],),
+    );
   }
 
   Widget seat(int rowNum, String colNum, BuildContext context){
-    return GestureDetector(
-      onTap: (){
-        if(widget.departure!='선택'&&widget.arrival!='선택'){
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 2),
+      child: GestureDetector(
+         onTap: (){ 
           onselected(rowNum, colNum);
-        showCupertinoDialog(context: context, builder: (context){
-          return CupertinoAlertDialog(
-            title: Text('예매 하시겠습니까?'),
-            content: Text('좌석 $rowNum - $colNum'),
-            actions: [
-              CupertinoDialogAction(
-                isDefaultAction: true,
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('취소')),
-              CupertinoDialogAction(
-                isDestructiveAction: true,
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return HomePage();
-                          },));
-                },
-                child: Text('확인')),
-            ],
-          );
-        });
-        }
-      },
-      child: Container(
-        height: 50,
-        width: 50,
-        decoration: BoxDecoration(
-          color: rowNum==selectedRow && colNum == selectedCol
-              ? Colors.purple
-              : Colors.grey,
-          borderRadius: BorderRadius.circular(10),
-          ),),
+          },
+          child: Container(
+            height: 50,
+            width: 50,
+            decoration: BoxDecoration(
+              color: rowNum==selectedRow && colNum == selectedCol
+                  ? Colors.purple
+                  : Colors.grey[300]!,
+              borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+      ),
     );
   }
 }

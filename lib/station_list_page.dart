@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-class StationListPage extends StatefulWidget{
-
-  StationListPage(this.isdeparture,this.departure,this.arrival);
+class StationListPage extends StatefulWidget {
+  StationListPage(this.isdeparture, this.departure, this.arrival);
   bool isdeparture;
   String departure;
   String arrival;
@@ -12,46 +11,55 @@ class StationListPage extends StatefulWidget{
 }
 
 class _StationListPageState extends State<StationListPage> {
-
-  List<String> stationList = ['수서','동탄','평택지제','천안아산','오송','대전','김천구미','동대구','경주','울산','부산'];
+  List<String> stationList = [
+    '수서',
+    '동탄',
+    '평택지제',
+    '천안아산',
+    '오송',
+    '대전',
+    '김천구미',
+    '동대구',
+    '경주',
+    '울산',
+    '부산'
+  ];
   List<Widget> stationWidgets = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.isdeparture?'출발역':'도착역')),
+      appBar: AppBar(title: Text(widget.isdeparture ? '출발역' : '도착역')),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          createStation()
-        ],
+        children: [createStation()],
       ),
     );
   }
 
   //위젯 리스트에 승차역 추가하기
-  Widget createStation(){
-    try{
+  Widget createStation() {
+    try {
       //이미 선택된 역 리스트에서 제외하기
-      if(widget.isdeparture==true){
+      if (widget.isdeparture == true) {
         stationList.remove(widget.arrival);
-        if(!stationList.contains(widget.departure) && widget.departure != '선택'){
+        if (!stationList.contains(widget.departure) &&
+            widget.departure != '선택') {
           stationList.add(widget.departure);
         }
-      }else if(widget.isdeparture==false){
+      } else if (widget.isdeparture == false) {
         stationList.remove(widget.departure);
-        if(!stationList.contains(widget.arrival) && widget.arrival != '선택'){
+        if (!stationList.contains(widget.arrival) && widget.arrival != '선택') {
           stationList.add(widget.arrival);
         }
       }
       //위젯에 추가해서 리스트 만들어주기
-      for(String name in stationList){
+      for (String name in stationList) {
         stationWidgets.add(stationName('$name', context));
         stationWidgets.add(Divider(color: Colors.grey[300], thickness: 0.3));
       }
-    return Column(children: stationWidgets);
-
-    }catch(e) {
+      return Column(children: stationWidgets);
+    } catch (e) {
       print('An error occurred: $e');
       return Column(
         children: [
@@ -61,22 +69,21 @@ class _StationListPageState extends State<StationListPage> {
     }
   }
 
-  //승차역 리스트 만들기 
-  Widget stationName(String station,BuildContext context){
+  //승차역 리스트 만들기
+  Widget stationName(String station, BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.pop(context,station);
+      onTap: () {
+        Navigator.pop(context, station);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Container(
-          child: 
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(station, style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold))),
+          child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(station,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
         ),
       ),
     );
-
   }
 }
